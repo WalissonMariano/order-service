@@ -18,6 +18,9 @@ import { ItemsModule } from './items/items.module';
       password: process.env.DB_PASSWORD,
       port: Number(process.env.DB_PORT),
       username: process.env.DB_USERNAME,
+      extra: {
+        ssl: process.env.DATABASE_URL ? true : false,
+      },
       entities: [`${__dirname}/**/*.entity{.js,.ts}`],
       migrations: [`${__dirname}/migration/{.ts,*.js}`],
       migrationsRun: true,
