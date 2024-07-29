@@ -1,11 +1,11 @@
 
 ## Descrição
 
-Api criada com objetivo de Registrar Pedidos e calcular impostos de acordo com o tipo de cada item inserido.
+API criada com objetivo de Registrar Pedidos e calcular impostos de acordo com o tipo de cada item inserido.
 
 ## Requisitos
 
-1 - Possuir um banco de dados Postgres instalado localmente ou em um servidor.
+1 - Possuir um banco de dados PostgreSQL instalado localmente ou em um servidor.
 
 ## Requisitos
 
