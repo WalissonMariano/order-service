@@ -32,8 +32,7 @@ export class CreateItemDto {
   })
   unitValue: number;
 
-  totalValue: number;
-  taxValue: number;
+  taxValue?: number;
   createdAt: Date;
   updateAt: Date;
 }

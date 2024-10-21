@@ -23,8 +23,8 @@ export class Item {
   @Column({ name: 'items_description', nullable: false })
   itemDescription: string;
 
-  @Column({ name: 'type_of_items', nullable: false })
-  typeOfItems: string;
+  @Column({ name: 'id_type_of_items', nullable: false })
+  idTypeOfItems: number;
 
   @Column('decimal', {
     name: 'quantity',
@@ -42,22 +42,6 @@ export class Item {
   })
   unitValue: number;
 
-  @Column('decimal', {
-    name: 'total_value',
-    nullable: false,
-    precision: 6,
-    scale: 2,
-  })
-  totalValue: number;
-
-  @Column('decimal', {
-    name: 'tax_value',
-    nullable: false,
-    precision: 6,
-    scale: 2,
-  })
-  taxValue: number;
-
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
@@ -73,11 +57,9 @@ export class Item {
     this.orderId = item?.orderId;
     this.numberItem = item?.numberItem;
     this.itemDescription = item?.itemDescription;
-    this.typeOfItems = item?.typeOfItems;
+    this.idTypeOfItems = item?.idTypeOfItems;
     this.quantity = item?.quantity;
     this.unitValue = item?.unitValue;
-    this.totalValue = item?.totalValue;
-    this.taxValue = item?.taxValue;
     this.createdAt = item?.createdAt;
     this.updateAt = item?.updateAt;
   }

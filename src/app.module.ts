@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { OrderModule } from './order/order.module';
 import { ItemsModule } from './items/items.module';
+import { TypeOfItemsModule } from './type-of-items/type-of-items.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ItemsModule } from './items/items.module';
     }),
     OrderModule,
     ItemsModule,
+    TypeOfItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

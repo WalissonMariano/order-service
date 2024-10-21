@@ -8,7 +8,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Documentação API Cadastro de Pedidos')
     .setDescription('API para registro de pedidos e calculo de impostos.')
-    .setVersion('1.0')
+    .setVersion('2.0')
     .addTag('Orders')
     .addTag('Items')
     .build();

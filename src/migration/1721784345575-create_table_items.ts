@@ -6,14 +6,11 @@ export class CreateTableItems1721784345575 implements MigrationInterface {
         
         CREATE TABLE public.items (
                 id integer NOT NULL,
-                order_id integer NOT NULL,
                 number_item integer NOT NULL,
                 items_description character varying NOT NULL,
-                type_of_items character varying NOT NULL,
+                id_type_of_items intenger NOT NULL,
                 quantity double precision NOT NULL,
                 unit_value double precision NOT NULL,
-                total_value double precision NOT NULL,
-                tax_value double precision NOT NULL,
                 created_at timestamp without time zone DEFAULT now() NOT NULL,
                 update_at timestamp without time zone DEFAULT now() NOT NULL,
                 PRIMARY KEY (id)
