@@ -5,8 +5,8 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
   } from 'typeorm';
-  
-  @Entity({ name: 'type-of-items' })
+
+  @Entity({ name: 'type_of_items' })
   export class TypeOfItems {
     @PrimaryGeneratedColumn('rowid')
     id: number;
@@ -26,9 +26,9 @@ import {
     constructor(typeOfItems?: Partial<TypeOfItems>) {
       this.id = typeOfItems?.id;
       this.typeItemsDescription = typeOfItems?.typeItemsDescription;
-      this.taxPercentagem = typeOfItems.taxPercentagem;
+      this.taxPercentagem = typeOfItems?.taxPercentagem;
       this.createdAt = typeOfItems?.createdAt;
       this.updateAt = typeOfItems?.updateAt;
     }
   }
-  
+ 
