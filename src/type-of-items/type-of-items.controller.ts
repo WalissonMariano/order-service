@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ReturnTypeOfItemsDto } from './dto/return-type-of-items.dto';
 import { TypeOfItemsService } from './type-of-items.service';
 import { CreateTypeOfItemsDto } from './dto/create-type-of-items.dto';
@@ -17,6 +17,7 @@ export class TypeOfItemsController {
         );
     }
 
+    @UsePipes(ValidationPipe)
     @Post()
     async createTypesOfItems(
         @Body() createTypesOfItems: CreateTypeOfItemsDto,
