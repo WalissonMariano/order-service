@@ -11,6 +11,10 @@ API criada com objetivo de Registrar Pedidos e calcular impostos de acordo com o
 
 Defina as conexões do banco de dados indo no arquivo .env.development.local 
 
+## Design de banco
+
+![Design de banco](https://ibb.co/8g573sj)
+
 ## Instalação de dependências
 
 ```bash

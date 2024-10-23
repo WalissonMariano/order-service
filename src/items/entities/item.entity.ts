@@ -14,9 +14,6 @@ export class Item {
   @PrimaryGeneratedColumn('rowid')
   id: number;
 
-  @Column({ name: 'order_id', nullable: false })
-  orderId: number;
-
   @Column({ name: 'number_item', nullable: false })
   numberItem: number;
 
@@ -25,14 +22,6 @@ export class Item {
 
   @Column({ name: 'id_type_of_items', nullable: false })
   idTypeOfItems: number;
-
-  @Column('decimal', {
-    name: 'quantity',
-    nullable: false,
-    precision: 6,
-    scale: 2,
-  })
-  quantity: number;
 
   @Column('decimal', {
     name: 'unit_value',
@@ -54,11 +43,9 @@ export class Item {
 
   constructor(item?: Partial<Item>) {
     this.id = item?.id;
-    this.orderId = item?.orderId;
     this.numberItem = item?.numberItem;
     this.itemDescription = item?.itemDescription;
     this.idTypeOfItems = item?.idTypeOfItems;
-    this.quantity = item?.quantity;
     this.unitValue = item?.unitValue;
     this.createdAt = item?.createdAt;
     this.updateAt = item?.updateAt;
