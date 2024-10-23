@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { TypeOfItems } from './entities/type-of-items.entity';
 import { CreateTypeOfItemsDto } from './dto/create-type-of-items.dto';
 
@@ -21,7 +21,21 @@ export class TypeOfItemsService {
         return typeOfItems;
     }
 
-    async getAllTypeOfItemsByName(typeItemsDescription: string): Promise<TypeOfItems> {
+    async getTypeOfItemsById(id: number): Promise<TypeOfItems> {
+        const typeOfItems = await this.typeOfItemsRepository.findOne({
+            where: {
+                id,
+            }
+        })
+
+        if (!typeOfItems) {
+            throw new NotFoundException(`Type id ${id} not found`);
+        }
+
+        return typeOfItems;
+    } 
+
+    async getTypeOfItemsByName(typeItemsDescription: string): Promise<TypeOfItems> {
         const typeOfItems = await this.typeOfItemsRepository.findOne({
             where: {
                 typeItemsDescription,
@@ -38,7 +52,7 @@ export class TypeOfItemsService {
     async createTypesOfItems(
         createTypesOfItems: CreateTypeOfItemsDto,
     ): Promise<TypeOfItems> {
-       const typeOfItems = await this.getAllTypeOfItemsByName(createTypesOfItems.typeItemsDescription)
+       const typeOfItems = await this.getTypeOfItemsByName(createTypesOfItems.typeItemsDescription)
        .catch(
             () => undefined,
        );
@@ -50,6 +64,12 @@ export class TypeOfItemsService {
        }
        
        return this.typeOfItemsRepository.save(createTypesOfItems);
+    }
+
+    async deleteTypeOfItems(typeOfItemsId: number): Promise<DeleteResult> {
+        await this.getTypeOfItemsById(typeOfItemsId);
+
+        return this.typeOfItemsRepository.delete({ id: typeOfItemsId });
     }
        
 }
