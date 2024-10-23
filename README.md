@@ -13,7 +13,7 @@ Defina as conexões do banco de dados indo no arquivo .env.development.local
 
 ## Design de banco
 
-![Design de banco]("https://ibb.co/8g573sj")
+<img src="https://i.ibb.co/Jj7sLtz/Untitled-6.png" alt="Untitled-6" border="0">
 
 ## Instalação de dependências
 
