@@ -11,7 +11,6 @@ export class ReturnItemDto {
     this.numberItem = item.numberItem;
     this.itemDescription = item.itemDescription;
     this.idTypeOfItems = item.idTypeOfItems;
-    this.quantity = item.quantity;
     this.unitValue = item.unitValue;
   }
 }

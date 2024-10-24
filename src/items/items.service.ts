@@ -36,7 +36,6 @@ export class ItemsService {
 
     item.itemDescription = updateItemDto.itemDescription;
     item.numberItem = updateItemDto.numberItem;
-    item.quantity = updateItemDto.numberItem;
 
     return await this.itemsRepository.save(item);
   }
