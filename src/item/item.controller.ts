@@ -34,13 +34,16 @@ export class ItemController {
     return this.itemService.getItemById(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateItemDto: UpdateItemDto) {
-    return this.itemService.update(+id, updateItemDto);
-  }
-
   @Delete(':id')
   deleteItem(@Param('id') id: number) {
     return this.itemService.deleteItem(id);
+  }
+
+  @Patch(':id')
+  updateItem(
+    @Param('id') id: number, 
+    @Body() updateItemDto: UpdateItemDto
+  ) {
+    return this.itemService.updateItem(id, updateItemDto);
   }
 }

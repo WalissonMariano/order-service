@@ -53,10 +53,8 @@ export class ItemService {
     return this.itemRepository.delete({ id: itemId });
   }
 
-  async update(id: number, updateItemDto: UpdateItemDto) {
-    const item = await this.itemRepository.findOne({
-      where: { id },
-    });
+  async updateItem(itemId: number, updateItemDto: UpdateItemDto): Promise<Item> {
+    const item = await this.getItemById(itemId);
 
     item.itemDescription = updateItemDto.itemDescription;
     item.numberItem = updateItemDto.numberItem;
