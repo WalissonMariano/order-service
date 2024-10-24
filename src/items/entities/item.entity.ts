@@ -17,11 +17,11 @@ export class Item {
   @Column({ name: 'number_item', nullable: false })
   numberItem: number;
 
+  @Column({ name: 'type_of_items_id', nullable: false })
+  typeOfItemsId: number;
+
   @Column({ name: 'items_description', nullable: false })
   itemDescription: string;
-
-  @Column({ name: 'id_type_of_items', nullable: false })
-  idTypeOfItems: number;
 
   @Column('decimal', {
     name: 'unit_value',
@@ -30,6 +30,9 @@ export class Item {
     scale: 2,
   })
   unitValue: number;
+
+  @Column({ name: 'image', nullable: false })
+  image: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -44,9 +47,10 @@ export class Item {
   constructor(item?: Partial<Item>) {
     this.id = item?.id;
     this.numberItem = item?.numberItem;
+    this.typeOfItemsId = item?.typeOfItemsId;
     this.itemDescription = item?.itemDescription;
-    this.idTypeOfItems = item?.idTypeOfItems;
     this.unitValue = item?.unitValue;
+    this.image = item?.image;
     this.createdAt = item?.createdAt;
     this.updateAt = item?.updateAt;
   }
