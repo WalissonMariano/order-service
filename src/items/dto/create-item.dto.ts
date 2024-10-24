@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 export class CreateItemDto {
-  orderId: number;
 
   @ApiProperty({
     description: 'Número do Item',
@@ -9,22 +8,16 @@ export class CreateItemDto {
   numberItem: number;
 
   @ApiProperty({
+    description: 'Id referente ao tipo do item',
+    example: 2,
+  })
+  typeOfItemId: number;
+
+  @ApiProperty({
     description: 'Descrição do Item',
     example: 'Galão de água 20L',
   })
   itemDescription: string;
-
-  @ApiProperty({
-    description: 'Tipo do item, "product","service","location"',
-    example: 'product',
-  })
-  typeOfItems: string;
-
-  @ApiProperty({
-    description: 'Quantidade solicitada',
-    example: 2,
-  })
-  quantity: number;
 
   @ApiProperty({
     description: 'Valor unitário do item',
@@ -32,7 +25,12 @@ export class CreateItemDto {
   })
   unitValue: number;
 
-  taxValue?: number;
+  @ApiProperty({
+    description: 'Url imagem do item',
+    example: 'https://i.ibb.co/Jj7sLtz/Untitled-6.png',
+  })
+  image: string;
+
   createdAt: Date;
   updateAt: Date;
 }
