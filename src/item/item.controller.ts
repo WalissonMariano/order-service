@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ItemService } from './item.service';
 import { CreateItemDto } from './dto/create-item.dto';
@@ -17,6 +19,7 @@ import { ApiTags } from '@nestjs/swagger';
 export class ItemController {
   constructor(private readonly itemService: ItemService) {}
 
+  @UsePipes(ValidationPipe)
   @Post()
   create(@Body() createItemDto: CreateItemDto) {
     return this.itemService.createItem(createItemDto);
@@ -39,6 +42,7 @@ export class ItemController {
     return this.itemService.deleteItem(id);
   }
 
+  @UsePipes(ValidationPipe)
   @Patch(':id')
   updateItem(
     @Param('id') id: number, 
