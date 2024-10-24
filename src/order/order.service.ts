@@ -5,15 +5,12 @@ import { Order } from './entities/order.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateItemDto } from '../item/dto/create-item.dto';
-import { ItemService } from '../item/item.service';
 
 @Injectable()
 export class OrderService {
   constructor(
     @InjectRepository(Order)
     private readonly orderRepository: Repository<Order>,
-
-    private readonly itemsService: ItemService,
   ) {}
 
   calculateItemValue(createItemDto: CreateItemDto) {

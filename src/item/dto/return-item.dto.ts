@@ -1,6 +1,7 @@
 import { Item } from '../entities/item.entity';
 
 export class ReturnItemDto {
+  id: number;
   numberItem: number;
   typeOfItemId: number;
   itemDescription: string;
@@ -8,6 +9,7 @@ export class ReturnItemDto {
   image: string;
 
   constructor(item: Item) {
+    this.id = item.id;
     this.numberItem = item.numberItem;
     this.typeOfItemId = item.typeOfItemId;
     this.itemDescription = item.itemDescription;

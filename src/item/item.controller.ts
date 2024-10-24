@@ -30,8 +30,8 @@ export class ItemController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.itemService.findOne(+id);
+  getItemById(@Param('id') id: number) {
+    return this.itemService.getItemById(id);
   }
 
   @Patch(':id')
@@ -40,7 +40,7 @@ export class ItemController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.itemService.remove(+id);
+  deleteItem(@Param('id') id: number) {
+    return this.itemService.deleteItem(id);
   }
 }

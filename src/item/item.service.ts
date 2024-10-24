@@ -2,14 +2,17 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { Item } from './entities/item.entity';
+import { TypeOfItemsService } from 'src/type-of-items/type-of-items.service';
+import { isEmpty } from 'class-validator';
 
 @Injectable()
 export class ItemService {
   constructor(
     @InjectRepository(Item)
     private readonly itemRepository: Repository<Item>,
+    private readonly typeOfItemService: TypeOfItemsService,
   ) {}
 
   async getAllItems(): Promise<Item[]> {
@@ -22,17 +25,32 @@ export class ItemService {
     return items;
   }
 
+  async getItemById(id: number): Promise<Item> {
+    const item = await this.itemRepository.findOne({
+      where: { 
+        id 
+      },
+    });
+
+    if (!item) {
+      throw new NotFoundException(`Product id ${id} not found`);
+    }
+
+    return item;
+  }
+
   async createItem(createItemDto: CreateItemDto) {
+    await this.typeOfItemService.getTypeOfItemsById(createItemDto.typeOfItemId);
+
     return this.itemRepository.save({
       ...createItemDto,
     });
   }
 
-  async findOne(id: number) {
-    const item = this.itemRepository.findOne({
-      where: { id },
-    });
-    return item;
+  async deleteItem(itemId: number): Promise<DeleteResult> {
+    await this.getItemById(itemId);
+
+    return this.itemRepository.delete({ id: itemId });
   }
 
   async update(id: number, updateItemDto: UpdateItemDto) {
@@ -46,7 +64,4 @@ export class ItemService {
     return await this.itemRepository.save(item);
   }
 
-  async remove(id: number): Promise<void> {
-    await this.itemRepository.delete(id);
-  }
 }
