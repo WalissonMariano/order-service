@@ -24,14 +24,6 @@ export class OrderController {
     return this.orderService.create(createOrderDto);
   }
 
-  @Post(':id/items')
-  async createItem(
-    @Param('id') id: number,
-    @Body() createItemDto: CreateItemDto,
-  ) {
-    return await this.orderService.createItemOrder(id, createItemDto);
-  }
-
   @Get()
   async findAll(): Promise<ReturnOrderDto[]> {
     return (await this.orderService.findAll()).map(

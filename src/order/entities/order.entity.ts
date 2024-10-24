@@ -25,15 +25,11 @@ export class Order {
   @UpdateDateColumn({ name: 'update_at' })
   updateAt: Date;
 
-  @OneToMany(() => Item, (items) => items.order, { eager: true, cascade: true })
-  items: Item[];
-
   constructor(order?: Partial<Order>) {
     this.id = order?.id;
     this.orderNumber = order?.orderNumber;
     this.orderDescription = order?.orderDescription;
     this.createdAt = order?.createdAt;
     this.updateAt = order?.updateAt;
-    this.items = order?.items;
   }
 }

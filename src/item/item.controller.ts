@@ -12,20 +12,20 @@ import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
 import { ReturnItemDto } from './dto/return-item.dto';
 import { ApiTags } from '@nestjs/swagger';
-@ApiTags('Items')
-@Controller('items')
+@ApiTags('Item')
+@Controller('item')
 export class ItemController {
   constructor(private readonly itemService: ItemService) {}
 
   @Post()
   create(@Body() createItemDto: CreateItemDto) {
-    return this.itemService.create(createItemDto);
+    return this.itemService.createItem(createItemDto);
   }
 
   @Get()
-  async findAll(): Promise<ReturnItemDto[]> {
-    return (await this.itemService.findAll()).map(
-      (item) => new ReturnItemDto(item),
+  async getAllItems(): Promise<ReturnItemDto[]> {
+    return (await this.itemService.getAllItems()).map(
+      (items) => new ReturnItemDto(items),
     );
   }
 

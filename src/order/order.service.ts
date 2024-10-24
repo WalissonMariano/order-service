@@ -64,21 +64,6 @@ export class OrderService {
     });
   }
 
-  async createItemOrder(id: number, createItemDto: CreateItemDto) {
-    const order = await this.orderRepository.findOne({
-      where: { id },
-    });
-
-    if (!order) {
-      throw new NotFoundException(`Pedido não existente.`);
-    }
-
-    createItemDto['orderId'] = id;
-    createItemDto = this.calculateItemValue(createItemDto);
-
-    return this.itemsService.create(createItemDto);
-  }
-
   findAll(): Promise<Order[]> {
     return this.orderRepository.find();
   }
@@ -86,9 +71,6 @@ export class OrderService {
   async findOne(id: number) {
     const order = await this.orderRepository.findOne({
       where: { id },
-      relations: {
-        items: true,
-      },
     });
 
     if (!order || order == null) {

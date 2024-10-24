@@ -13,8 +13,5 @@ export class ReturnOrderDto {
     this.orderNumber = order.orderNumber;
     this.orderDescription = order.orderDescription;
     this.createAt = order.createdAt;
-    this.items = order.items
-      ? order.items.map((items) => new ReturnItemDto(items))
-      : undefined;
   }
 }
