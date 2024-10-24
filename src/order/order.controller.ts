@@ -11,7 +11,7 @@ import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { ReturnOrderDto } from './dto/return-order.dto';
-import { CreateItemDto } from 'src/items/dto/create-item.dto';
+import { CreateItemDto } from 'src/item/dto/create-item.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Orders')

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CreateItemDto } from 'src/items/dto/create-item.dto';
+import { CreateItemDto } from 'src/item/dto/create-item.dto';
 
 export class CreateOrderDto {
   @ApiProperty({

@@ -6,41 +6,41 @@ import { Repository } from 'typeorm';
 import { Item } from './entities/item.entity';
 
 @Injectable()
-export class ItemsService {
+export class ItemService {
   constructor(
     @InjectRepository(Item)
-    private readonly itemsRepository: Repository<Item>,
+    private readonly itemRepository: Repository<Item>,
   ) {}
 
   create(createItemDto: CreateItemDto) {
-    return this.itemsRepository.save({
+    return this.itemRepository.save({
       ...createItemDto,
     });
   }
 
   async findAll(): Promise<Item[]> {
-    return this.itemsRepository.find();
+    return this.itemRepository.find();
   }
 
   findOne(id: number) {
-    const item = this.itemsRepository.findOne({
+    const item = this.itemRepository.findOne({
       where: { id },
     });
     return item;
   }
 
   async update(id: number, updateItemDto: UpdateItemDto) {
-    const item = await this.itemsRepository.findOne({
+    const item = await this.itemRepository.findOne({
       where: { id },
     });
 
     item.itemDescription = updateItemDto.itemDescription;
     item.numberItem = updateItemDto.numberItem;
 
-    return await this.itemsRepository.save(item);
+    return await this.itemRepository.save(item);
   }
 
   async remove(id: number): Promise<void> {
-    await this.itemsRepository.delete(id);
+    await this.itemRepository.delete(id);
   }
 }
