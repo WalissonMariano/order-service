@@ -1,3 +1,4 @@
+import { TypeOfItems } from 'src/type-of-items/entities/type-of-items.entity';
 import {
   Column,
   Entity,
@@ -39,14 +40,8 @@ export class Item {
   @UpdateDateColumn({ name: 'update_at' })
   updateAt: Date;
 
-  constructor(item?: Partial<Item>) {
-    this.id = item?.id;
-    this.numberItem = item?.numberItem;
-    this.typeOfItemId = item?.typeOfItemId;
-    this.itemDescription = item?.itemDescription;
-    this.unitValue = item?.unitValue;
-    this.image = item?.image;
-    this.createdAt = item?.createdAt;
-    this.updateAt = item?.updateAt;
-  }
+  @ManyToOne(() => TypeOfItems, (typeOfItems: TypeOfItems) => typeOfItems.item, { eager: true })
+  @JoinColumn({name: 'type_of_item_id', referencedColumnName: 'id'})
+  typeOfItems?: TypeOfItems;
+  
 }

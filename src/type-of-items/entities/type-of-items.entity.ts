@@ -1,7 +1,9 @@
+import { Item } from 'src/item/entities/item.entity';
 import {
     Column,
     CreateDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
   } from 'typeorm';
@@ -22,13 +24,9 @@ import {
   
     @UpdateDateColumn({ name: 'update_at' })
     updateAt: Date;
+
+    @OneToMany(() => Item, (item: Item) => item.typeOfItemId, { cascade: true })
+    item: Item[];
   
-    constructor(typeOfItems?: Partial<TypeOfItems>) {
-      this.id = typeOfItems?.id;
-      this.typeItemsDescription = typeOfItems?.typeItemsDescription;
-      this.taxPercentagem = typeOfItems?.taxPercentagem;
-      this.createdAt = typeOfItems?.createdAt;
-      this.updateAt = typeOfItems?.updateAt;
-    }
   }
  
