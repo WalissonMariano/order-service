@@ -41,7 +41,21 @@ export class OrderService {
     return order;
   }
 
+  async getOrderByNumber(orderNumber: number) {
+    const order = await this.orderRepository.findOne({
+      where: { orderNumber },
+    });
+
+    return order;
+  }
+
   async createOrder(createOrderDto: CreateOrderDto) {
+    const order = await this.getOrderByNumber(createOrderDto.orderNumber);
+
+    if (order) {
+      throw new NotFoundException(`existing order number ${createOrderDto.orderNumber}`);
+    }
+
     return this.orderRepository.save({
       ...createOrderDto,
     });
