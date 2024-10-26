@@ -3,7 +3,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order } from './entities/order.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CreateItemDto } from '../item/dto/create-item.dto';
 
 @Injectable()
@@ -47,17 +47,19 @@ export class OrderService {
     });
   }
 
-  async update(id: number, updateOrderDto: UpdateOrderDto) {
-    const order = await this.orderRepository.findOne({
-      where: { id },
-    });
+  async deleteOrder(orderId: number): Promise<DeleteResult> {
+    await this.getOrderById(orderId);
+
+    return this.orderRepository.delete({id: orderId});
+  }
+
+  async updateOrder(orderId: number, updateOrderDto: UpdateOrderDto) {
+    const order = await this.getOrderById(orderId);
 
     order.orderNumber = updateOrderDto.orderNumber;
     order.orderDescription = updateOrderDto.orderDescription;
+
     return await this.orderRepository.save(order);
   }
-
-  async remove(id: number): Promise<void> {
-    await this.orderRepository.delete(id);
-  }
+ 
 }
