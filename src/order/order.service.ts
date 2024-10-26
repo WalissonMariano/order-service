@@ -19,26 +19,32 @@ export class OrderService {
     return createItemDto;
   }
 
-  async createOrder(createOrderDto: CreateOrderDto) {
-    return this.orderRepository.save({
-      ...createOrderDto,
-    });
+  async getAllOrders(): Promise<Order[]> {
+    const orders = await this.orderRepository.find()
+
+    if (!orders || orders.length === 0) {
+      throw new NotFoundException(`Not found orders`);
+    }
+
+    return orders;
   }
 
-  async findAll(): Promise<Order[]> {
-    return this.orderRepository.find();
-  }
-
-  async findOne(id: number) {
+  async getOrderById(id: number) {
     const order = await this.orderRepository.findOne({
       where: { id },
     });
 
     if (!order || order == null) {
-      throw new NotFoundException(`Pedido não existente.`);
+      throw new NotFoundException(`Order id ${id} not found.`);
     }
 
     return order;
+  }
+
+  async createOrder(createOrderDto: CreateOrderDto) {
+    return this.orderRepository.save({
+      ...createOrderDto,
+    });
   }
 
   async update(id: number, updateOrderDto: UpdateOrderDto) {

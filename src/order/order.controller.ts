@@ -28,15 +28,15 @@ export class OrderController {
   }
 
   @Get()
-  async findAll(): Promise<ReturnOrderDto[]> {
-    return (await this.orderService.findAll()).map(
+  async getAllOrders(): Promise<ReturnOrderDto[]> {
+    return (await this.orderService.getAllOrders()).map(
       (order) => new ReturnOrderDto(order),
     );
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<ReturnOrderDto> {
-    return new ReturnOrderDto(await this.orderService.findOne(+id));
+  async getOrderById(@Param('id') id: string): Promise<ReturnOrderDto> {
+    return new ReturnOrderDto(await this.orderService.getOrderById(+id));
   }
 
   @UsePipes(ValidationPipe)
