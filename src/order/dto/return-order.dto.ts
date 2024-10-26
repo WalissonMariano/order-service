@@ -1,4 +1,3 @@
-import { ReturnItemDto } from 'src/item/dto/return-item.dto';
 import { Order } from '../entities/order.entity';
 
 export class ReturnOrderDto {
@@ -6,7 +5,6 @@ export class ReturnOrderDto {
   orderNumber: number;
   orderDescription: string;
   createAt: Date;
-  items?: ReturnItemDto[];
 
   constructor(order: Order) {
     this.id = order.id;

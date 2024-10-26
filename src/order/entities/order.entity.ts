@@ -24,7 +24,7 @@ export class Order {
 
   @UpdateDateColumn({ name: 'update_at' })
   updateAt: Date;
-
+/*
   constructor(order?: Partial<Order>) {
     this.id = order?.id;
     this.orderNumber = order?.orderNumber;
@@ -32,4 +32,5 @@ export class Order {
     this.createdAt = order?.createdAt;
     this.updateAt = order?.updateAt;
   }
+    */
 }

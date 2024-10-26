@@ -13,55 +13,19 @@ export class OrderService {
     private readonly orderRepository: Repository<Order>,
   ) {}
 
-  calculateItemValue(createItemDto: CreateItemDto) {
-    let taxValue: number;
-    let totalValue: number;
-    switch (createItemDto['typeOfItems']) {
-      case 'product':
-        taxValue = createItemDto['unitValue'] * 0.1 * createItemDto['quantity'];
-        totalValue = createItemDto['unitValue'] * createItemDto['quantity'];
-
-        createItemDto['taxValue'] = taxValue;
-        createItemDto['totalValue'] = totalValue;
-
-        break;
-      case 'service':
-        taxValue =
-          createItemDto['unitValue'] * 0.075 * createItemDto['quantity'];
-        totalValue = createItemDto['unitValue'] * createItemDto['quantity'];
-
-        createItemDto['taxValue'] = taxValue;
-        createItemDto['totalValue'] = totalValue;
-        break;
-      case 'location':
-        taxValue =
-          createItemDto['unitValue'] * 0.05 * createItemDto['quantity'];
-        totalValue = createItemDto['unitValue'] * createItemDto['quantity'];
-
-        createItemDto['taxValue'] = taxValue;
-        createItemDto['totalValue'] = totalValue;
-        break;
-      default:
-        throw new NotFoundException(`O tipo de produto é invalido`);
-    }
+  async calculateItemValue(createItemDto: CreateItemDto) {
+    
 
     return createItemDto;
   }
 
-  create(createOrderDto: CreateOrderDto) {
-    if (createOrderDto['items']) {
-      for (let i = 0; i < createOrderDto['items'].length; i++) {
-        createOrderDto['items'][i] = this.calculateItemValue(
-          createOrderDto['items'][i],
-        );
-      }
-    }
+  async createOrder(createOrderDto: CreateOrderDto) {
     return this.orderRepository.save({
       ...createOrderDto,
     });
   }
 
-  findAll(): Promise<Order[]> {
+  async findAll(): Promise<Order[]> {
     return this.orderRepository.find();
   }
 
