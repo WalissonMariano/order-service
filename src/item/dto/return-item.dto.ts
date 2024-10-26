@@ -7,7 +7,7 @@ export class ReturnItemDto {
   itemDescription: string;
   unitValue: number;
   image: string;
-  typeOfItemId: number;
+  typeOfItems: ReturnTypeOfItemsDto;
 
   constructor(item: Item) {
     this.id = item.id;
@@ -15,6 +15,6 @@ export class ReturnItemDto {
     this.itemDescription = item.itemDescription;
     this.unitValue = item.unitValue;
     this.image = item.image;
-    this.typeOfItemId = item.typeOfItemId;
+    this.typeOfItems = item.typeOfItems;
   }
 }

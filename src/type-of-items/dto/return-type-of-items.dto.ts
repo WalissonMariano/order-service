@@ -5,12 +5,10 @@ export class ReturnTypeOfItemsDto {
   id: number;
   typeItemsDescription: string;
   taxPercentagem: number;
-  createAt: Date;
 
   constructor(typeOfItems: TypeOfItems) {
     this.id = typeOfItems.id;
     this.typeItemsDescription = typeOfItems.typeItemsDescription;
     this.taxPercentagem = typeOfItems.taxPercentagem;
-    this.createAt = typeOfItems.createdAt;
   }
 }

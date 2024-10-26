@@ -15,7 +15,9 @@ export class ItemService {
   ) {}
 
   async getAllItems(): Promise<Item[]> {
-    const items = await this.itemRepository.find();
+    const items = await this.itemRepository.find({
+      relations: ['typeOfItems'],
+    });
     
     if (!items || items.length === 0) {
       throw new NotFoundException('Not found items');

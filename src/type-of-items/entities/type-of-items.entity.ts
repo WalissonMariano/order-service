@@ -25,7 +25,7 @@ import {
     @UpdateDateColumn({ name: 'update_at' })
     updateAt: Date;
 
-    @OneToMany(() => Item, (item: Item) => item.typeOfItemId, { cascade: true })
+    @OneToMany(() => Item, (item: Item) => item.typeOfItemId)
     item: Item[];
   
   }
