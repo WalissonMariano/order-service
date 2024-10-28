@@ -51,7 +51,7 @@ export class OrderService {
     return order;
   }
 
-  async createOrder(createOrderDto: CreateOrderDto) {
+  async createOrder(createOrderDto: CreateOrderDto): Promise<Order> {
     const order = await this.getOrderByNumber(createOrderDto.orderNumber);
 
     if (order) {
@@ -60,6 +60,7 @@ export class OrderService {
 
     return this.orderRepository.save({
       ...createOrderDto,
+      orderItems: createOrderDto.orderItems
     });
   }
 

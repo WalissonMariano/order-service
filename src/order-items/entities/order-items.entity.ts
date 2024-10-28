@@ -1,4 +1,5 @@
 import { Item } from "src/item/entities/item.entity";
+import { ReturnOrderDto } from "src/order/dto/return-order.dto";
 import { Order } from "src/order/entities/order.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -40,7 +41,7 @@ export class OrderItems {
 
     @ManyToOne(() => Order, (order: Order) => order.orderItems, { onDelete: 'CASCADE' })
     @JoinColumn({name: 'order_id', referencedColumnName: 'id'})
-    order?: Order;
+    order: Order;
 
     @OneToOne(() => Item, { eager: true, cascade: true })
     @JoinColumn({name: 'item_id', referencedColumnName: 'id'})

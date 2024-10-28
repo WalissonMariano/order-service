@@ -30,5 +30,5 @@ export class Order {
   updateAt: Date;
 
   @OneToMany(() => OrderItems, (orderItems: OrderItems) => orderItems.order, {cascade: true, eager: true,})
-  orderItems?: ReturnOrderItemsDto;
+  orderItems: OrderItems[];
 }
