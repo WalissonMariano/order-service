@@ -20,7 +20,9 @@ export class OrderService {
   }
 
   async getAllOrders(): Promise<Order[]> {
-    const orders = await this.orderRepository.find()
+    const orders = await this.orderRepository.find({
+      relations: ['orderItems']
+    })
 
     if (!orders || orders.length === 0) {
       throw new NotFoundException(`Not found orders`);

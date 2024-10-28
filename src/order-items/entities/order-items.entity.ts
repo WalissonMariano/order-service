@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Item } from "src/item/entities/item.entity";
+import { Order } from "src/order/entities/order.entity";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({name: 'order_items'})
 export class OrderItems {
@@ -36,4 +38,11 @@ export class OrderItems {
     @UpdateDateColumn({ name: 'update_at' })
     updateAt: Date;
 
+    @ManyToOne(() => Order, (order: Order) => order.orderItems, { onDelete: 'CASCADE' })
+    @JoinColumn({name: 'order_id', referencedColumnName: 'id'})
+    order?: Order;
+
+    @OneToOne(() => Item, { eager: true, cascade: true })
+    @JoinColumn({name: 'item_id', referencedColumnName: 'id'})
+    item: Item;
 }

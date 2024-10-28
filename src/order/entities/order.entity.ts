@@ -1,12 +1,16 @@
+import { OrderItems } from 'src/order-items/entities/order-items.entity';
 import { Item } from '../../item/entities/item.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { ReturnOrderItemsDto } from 'src/order-items/dto/return-order-items.dto';
 
 @Entity({ name: 'order' })
 export class Order {
@@ -24,13 +28,7 @@ export class Order {
 
   @UpdateDateColumn({ name: 'update_at' })
   updateAt: Date;
-/*
-  constructor(order?: Partial<Order>) {
-    this.id = order?.id;
-    this.orderNumber = order?.orderNumber;
-    this.orderDescription = order?.orderDescription;
-    this.createdAt = order?.createdAt;
-    this.updateAt = order?.updateAt;
-  }
-    */
+
+  @OneToMany(() => OrderItems, (orderItems: OrderItems) => orderItems.order, {cascade: true, eager: true,})
+  orderItems?: ReturnOrderItemsDto;
 }
