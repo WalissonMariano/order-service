@@ -5,12 +5,14 @@ import { Order } from './entities/order.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { CreateItemDto } from '../item/dto/create-item.dto';
+import { ItemService } from 'src/item/item.service';
 
 @Injectable()
 export class OrderService {
   constructor(
     @InjectRepository(Order)
     private readonly orderRepository: Repository<Order>,
+    private readonly itemService: ItemService,
   ) {}
 
   async calculateItemValue(createItemDto: CreateItemDto) {
@@ -56,6 +58,10 @@ export class OrderService {
 
     if (order) {
       throw new NotFoundException(`existing order number ${createOrderDto.orderNumber}`);
+    }
+
+    for (const orderItem of createOrderDto.orderItems) {
+        await this.itemService.getItemById(orderItem.itemId);
     }
 
     return this.orderRepository.save({

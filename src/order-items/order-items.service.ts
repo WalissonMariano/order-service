@@ -3,12 +3,15 @@ import { Repository } from 'typeorm';
 import { OrderItems } from './entities/order-items.entity';
 import { CreateOrderItemsDto } from './dto/create-order-items.dto';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ItemService } from 'src/item/item.service';
 
 @Injectable()
 export class OrderItemsService {
     constructor(
         @InjectRepository(OrderItems)
         private readonly orderItemsRepository: Repository<OrderItems>,
+
+        private readonly itemService: ItemService,
     ){}
 
     async getAllTypesOfItems(): Promise<OrderItems[]> {
@@ -20,6 +23,8 @@ export class OrderItemsService {
     async createOrderItems(
         createOrderItems: CreateOrderItemsDto,
     ): Promise<OrderItems> {
+        await this.itemService.getItemById(createOrderItems.itemId); 
+
         return this.orderItemsRepository.save(createOrderItems);
     }
 }

@@ -13,5 +13,6 @@ import { TypeOfItemsService } from 'src/type-of-items/type-of-items.service';
   ],
   controllers: [ItemController],
   providers: [ItemService],
+  exports: [ItemService]
 })
 export class ItemsModule {}
