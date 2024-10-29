@@ -15,6 +15,7 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 import { ReturnOrderDto } from './dto/return-order.dto';
 import { CreateItemDto } from 'src/item/dto/create-item.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateOrderItemsDto } from 'src/order-items/dto/create-order-items.dto';
 
 @ApiTags('Orders')
 @Controller('order')
@@ -27,6 +28,15 @@ export class OrderController {
     return await this.orderService.createOrder(createOrderDto);
   }
 
+  @UsePipes(ValidationPipe)
+  @Post(':id/items')
+  async createOrderItemsByIdOrder(
+    @Param('id') id: number,
+    @Body() createOrderItemsDto: CreateOrderItemsDto
+  ) {
+    return await this.orderService.createOrderItemsByIdOrder(id, createOrderItemsDto);
+  }
+
   @Get()
   async getAllOrders(): Promise<ReturnOrderDto[]> {
     return (await this.orderService.getAllOrders()).map(
@@ -35,8 +45,8 @@ export class OrderController {
   }
 
   @Get(':id')
-  async getOrderById(@Param('id') id: string): Promise<ReturnOrderDto> {
-    return new ReturnOrderDto(await this.orderService.getOrderById(+id));
+  async getOrderById(@Param('id') id: number): Promise<ReturnOrderDto> {
+    return new ReturnOrderDto(await this.orderService.getOrderById(id));
   }
 
   @UsePipes(ValidationPipe)

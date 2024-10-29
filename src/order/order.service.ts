@@ -6,14 +6,20 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { ItemService } from 'src/item/item.service';
 import { OrderItemsService } from 'src/order-items/order-items.service';
+import { CreateOrderItemsDto } from 'src/order-items/dto/create-order-items.dto';
+import { OrderItems } from 'src/order-items/entities/order-items.entity';
 
 @Injectable()
 export class OrderService {
   constructor(
     @InjectRepository(Order)
     private readonly orderRepository: Repository<Order>,
-    private readonly itemService: ItemService,
+
+    @InjectRepository(OrderItems)
+    private readonly orderItemsRepository: Repository<OrderItems>,
+
     private readonly orderItemsService: OrderItemsService,
+    private readonly itemService: ItemService,
   ) {}
 
   async getAllOrders(): Promise<Order[]> {
@@ -82,6 +88,24 @@ export class OrderService {
     });
   }
 
+  async createOrderItemsByIdOrder(orderId: number, createOrderItems: CreateOrderItemsDto): Promise<OrderItems> {
+
+    await this.getOrderById(orderId);
+    await this.itemService.getItemById(createOrderItems.itemId); 
+
+    const taxValue = await this.orderItemsService.calculateTaxValue(createOrderItems.itemId, createOrderItems.quantity);
+    const totalValue = await this.orderItemsService.calculateTotalValue(createOrderItems.itemId, createOrderItems.quantity);
+
+    const orderItems = this.orderItemsRepository.create({
+      ...createOrderItems,
+      orderId,
+      taxValue,
+      totalValue,
+    });
+
+    return this.orderItemsRepository.save(orderItems);
+  }
+
   async deleteOrder(orderId: number): Promise<DeleteResult> {
     await this.getOrderById(orderId);
 
@@ -90,7 +114,6 @@ export class OrderService {
 
   async updateOrder(orderId: number, updateOrderDto: UpdateOrderDto) {
     const order = await this.getOrderById(orderId);
-
     order.orderNumber = updateOrderDto.orderNumber;
     order.orderDescription = updateOrderDto.orderDescription;
 

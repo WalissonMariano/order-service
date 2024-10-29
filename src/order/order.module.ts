@@ -10,6 +10,7 @@ import { OrderItemsModule } from 'src/order-items/order-items.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([Order]),
+    TypeOrmModule.forFeature([OrderItems]),
     forwardRef(() => OrderItems),
     ItemsModule,
     OrderItemsModule
