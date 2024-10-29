@@ -40,6 +40,13 @@ export class ItemService {
     return item;
   }
 
+  async getTaxPercentageByItemId(idItem: number) {
+    const item = await this.getItemById(idItem);
+    const taxPercentage = this.typeOfItemService.getTypeOfItemsById(item.typeOfItemId);
+
+    return taxPercentage;
+  }
+
   async createItem(createItemDto: CreateItemDto) {
     await this.typeOfItemService.getTypeOfItemsById(createItemDto.typeOfItemId);
 

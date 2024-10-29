@@ -1,3 +1,4 @@
+import { IsNumber } from "class-validator";
 import { Item } from "src/item/entities/item.entity";
 import { ReturnOrderDto } from "src/order/dto/return-order.dto";
 import { Order } from "src/order/entities/order.entity";

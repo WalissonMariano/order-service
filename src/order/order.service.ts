@@ -15,12 +15,6 @@ export class OrderService {
     private readonly itemService: ItemService,
   ) {}
 
-  async calculateItemValue(createItemDto: CreateItemDto) {
-    
-
-    return createItemDto;
-  }
-
   async getAllOrders(): Promise<Order[]> {
     const orders = await this.orderRepository.find({
       relations: ['orderItems']
