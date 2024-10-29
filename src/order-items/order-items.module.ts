@@ -13,5 +13,6 @@ import { ItemsModule } from 'src/item/item.module';
     OrderItemsModule,
   ],
   providers: [OrderItemsService],
+  exports: [OrderItemsModule, OrderItemsService]
 })
 export class OrderItemsModule {}

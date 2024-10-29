@@ -5,12 +5,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Order } from './entities/order.entity';
 import { OrderItems } from 'src/order-items/entities/order-items.entity';
 import { ItemsModule } from 'src/item/item.module';
+import { OrderItemsModule } from 'src/order-items/order-items.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Order]),
     forwardRef(() => OrderItems),
-    ItemsModule
+    ItemsModule,
+    OrderItemsModule
   ],
   controllers: [OrderController],
   providers: [OrderService],

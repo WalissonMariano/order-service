@@ -40,14 +40,14 @@ export class ItemService {
     return item;
   }
 
-  async getTaxPercentageByItemId(idItem: number) {
+  async getTaxPercentageByItemId(idItem: number): Promise<number> {
     const item = await this.getItemById(idItem);
-    const taxPercentage = this.typeOfItemService.getTypeOfItemsById(item.typeOfItemId);
+    const typeOfItems = await this.typeOfItemService.getTypeOfItemsById(item.typeOfItemId);
 
-    return taxPercentage;
+    return typeOfItems?.taxPercentagem ?? 0;
   }
 
-  async createItem(createItemDto: CreateItemDto) {
+  async createItem(createItemDto: CreateItemDto): Promise<CreateItemDto> {
     await this.typeOfItemService.getTypeOfItemsById(createItemDto.typeOfItemId);
 
     return this.itemRepository.save({

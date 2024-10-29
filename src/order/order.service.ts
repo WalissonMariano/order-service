@@ -1,11 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order } from './entities/order.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
-import { CreateItemDto } from '../item/dto/create-item.dto';
 import { ItemService } from 'src/item/item.service';
+import { OrderItemsService } from 'src/order-items/order-items.service';
 
 @Injectable()
 export class OrderService {
@@ -13,6 +13,7 @@ export class OrderService {
     @InjectRepository(Order)
     private readonly orderRepository: Repository<Order>,
     private readonly itemService: ItemService,
+    private readonly orderItemsService: OrderItemsService,
   ) {}
 
   async getAllOrders(): Promise<Order[]> {
@@ -54,13 +55,30 @@ export class OrderService {
       throw new NotFoundException(`existing order number ${createOrderDto.orderNumber}`);
     }
 
+    if(!createOrderDto.orderItems || createOrderDto.orderItems.length === 0) {
+      throw new BadRequestException('orderItems are required.');
+    }
+
     for (const orderItem of createOrderDto.orderItems) {
         await this.itemService.getItemById(orderItem.itemId);
     }
 
+    const orderItemsValues = await Promise.all(
+      createOrderDto.orderItems.map(async (orderItems) => {
+        const taxValue = await this.orderItemsService.calculateTaxValue(orderItems.itemId,orderItems.quantity);
+        const totalValue = await this.orderItemsService.calculateTotalValue(orderItems.itemId,orderItems.quantity);
+
+        return {
+          ...orderItems,
+          taxValue,
+          totalValue,
+        }
+      })
+    );
+
     return this.orderRepository.save({
       ...createOrderDto,
-      orderItems: createOrderDto.orderItems
+      orderItems: orderItemsValues,
     });
   }
 

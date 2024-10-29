@@ -30,7 +30,7 @@ export class OrderItemsService {
     async calculateTaxValue(itemId: number, quantity: number): Promise<number> {
         const unitValue = (await this.itemService.getItemById(itemId)).unitValue;
         const taxPercentage = await this.itemService.getTaxPercentageByItemId(itemId);
-        
+
         return unitValue * (Number(taxPercentage) / 100) * quantity;
     }
 
