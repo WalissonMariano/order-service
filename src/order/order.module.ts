@@ -9,7 +9,7 @@ import { OrderItemsModule } from '../order-items/order-items.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Order,OrderItems]),
+    TypeOrmModule.forFeature([Order, OrderItems]),
     ItemsModule,
     OrderItemsModule
   ],
