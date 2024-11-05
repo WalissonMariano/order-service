@@ -2,8 +2,8 @@ import { forwardRef, Module } from '@nestjs/common';
 import { OrderItemsService } from './order-items.service';
 import { OrderItems } from './entities/order-items.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Item } from 'src/item/entities/item.entity';
-import { ItemsModule } from 'src/item/item.module';
+import { Item } from '../item/entities/item.entity';
+import { ItemsModule } from '../item/item.module';
 
 @Module({
   imports: [
@@ -13,6 +13,6 @@ import { ItemsModule } from 'src/item/item.module';
     OrderItemsModule,
   ],
   providers: [OrderItemsService],
-  exports: [OrderItemsModule, OrderItemsService]
+  exports: [OrderItemsModule, OrderItemsService, OrderItems]
 })
 export class OrderItemsModule {}

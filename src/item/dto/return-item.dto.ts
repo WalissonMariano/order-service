@@ -1,4 +1,4 @@
-import { ReturnTypeOfItemsDto } from 'src/type-of-items/dto/return-type-of-items.dto';
+import { ReturnTypeOfItemsDto } from '../../type-of-items/dto/return-type-of-items.dto';
 import { Item } from '../entities/item.entity';
 
 export class ReturnItemDto {

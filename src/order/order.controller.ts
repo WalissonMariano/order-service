@@ -13,9 +13,8 @@ import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { ReturnOrderDto } from './dto/return-order.dto';
-import { CreateItemDto } from 'src/item/dto/create-item.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateOrderItemsDto } from 'src/order-items/dto/create-order-items.dto';
+import { CreateOrderItemsDto } from '../order-items/dto/create-order-items.dto';
 
 @ApiTags('Orders')
 @Controller('order')

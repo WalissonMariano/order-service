@@ -1,7 +1,5 @@
-import { IsNumber } from "class-validator";
-import { Item } from "src/item/entities/item.entity";
-import { ReturnOrderDto } from "src/order/dto/return-order.dto";
-import { Order } from "src/order/entities/order.entity";
+import { Item } from "../../item/entities/item.entity";
+import { Order } from "../../order/entities/order.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({name: 'order_items'})

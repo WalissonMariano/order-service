@@ -1,9 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsArray, IsNumber, IsString, ValidateNested } from 'class-validator';
-import { CreateOrderItemsDto } from 'src/order-items/dto/create-order-items.dto';
-import { Order } from '../entities/order.entity';
-import { OrderItems } from 'src/order-items/entities/order-items.entity';
+import { IsNumber, IsString, ValidateNested } from 'class-validator';
+import { CreateOrderItemsDto } from '../../order-items/dto/create-order-items.dto';
+
 
 export class CreateOrderDto {
   @ApiProperty({

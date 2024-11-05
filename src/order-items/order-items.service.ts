@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import { OrderItems } from './entities/order-items.entity';
 import { CreateOrderItemsDto } from './dto/create-order-items.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ItemService } from 'src/item/item.service';
+import { ItemService } from '../item/item.service';
 
 @Injectable()
 export class OrderItemsService {

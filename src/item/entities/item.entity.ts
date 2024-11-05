@@ -1,4 +1,4 @@
-import { TypeOfItems } from 'src/type-of-items/entities/type-of-items.entity';
+import { TypeOfItems } from '../../type-of-items/entities/type-of-items.entity';
 import {
   Column,
   Entity,

@@ -4,7 +4,7 @@ import { UpdateItemDto } from './dto/update-item.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { Item } from './entities/item.entity';
-import { TypeOfItemsService } from 'src/type-of-items/type-of-items.service';
+import { TypeOfItemsService } from '../type-of-items/type-of-items.service';
 
 @Injectable()
 export class ItemService {

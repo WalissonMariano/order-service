@@ -4,10 +4,10 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order } from './entities/order.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
-import { ItemService } from 'src/item/item.service';
-import { OrderItemsService } from 'src/order-items/order-items.service';
-import { CreateOrderItemsDto } from 'src/order-items/dto/create-order-items.dto';
-import { OrderItems } from 'src/order-items/entities/order-items.entity';
+import { ItemService } from '../item/item.service';
+import { OrderItemsService } from '../order-items/order-items.service';
+import { CreateOrderItemsDto } from '../order-items/dto/create-order-items.dto';
+import { OrderItems } from '../order-items/entities/order-items.entity';
 
 @Injectable()
 export class OrderService {
