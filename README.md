@@ -1,15 +1,25 @@
 
 ## Descrição
 
-API criada com objetivo de Registrar Pedidos e calcular impostos de acordo com o tipo de cada item inserido.
+API para gerenciar pedidos, incluindo operações de criação, atualização, exclusão e visualização de pedidos e seus itens.
 
 ## Requisitos
 
-1 - Possuir um banco de dados PostgreSQL instalado localmente ou em um servidor.
+1 - Possuir um banco de dados PostgreSQL instalado.
+1 - Possuir NodeJs instalado.
 
-## Requisitos
+## Variáveis de ambiente
 
-Defina as conexões do banco de dados indo no arquivo .env.development.local 
+Declare as seguintes variáveis de ambiente:
+
+|Váriavel|Descrição|
+| --- | --- |
+| DB_HOST | Host do banco de dados |
+| DB_USERNAME | Usuário do banco de dados |
+| DB_PASSWORD | Senha do banco de dados |
+| DB_PORT | Porta do banco de dados |
+| DB_DATABASE | Nome do banco de dados |
+
 
 ## Design de banco
 
@@ -34,6 +44,3 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Licença
-
-Nest is [MIT licensed](LICENSE).
