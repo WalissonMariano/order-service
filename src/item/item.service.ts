@@ -60,7 +60,7 @@ export class ItemService {
 
     return this.itemRepository.delete({ id: itemId });
   }
-
+ 
   async updateItem(itemId: number, updateItemDto: UpdateItemDto): Promise<Item> {
     const item = await this.getItemById(itemId);
 

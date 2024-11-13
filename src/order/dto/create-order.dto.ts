@@ -5,20 +5,22 @@ import { CreateOrderItemsDto } from '../../order-items/dto/create-order-items.dt
 
 
 export class CreateOrderDto {
+
   @ApiProperty({
-    description: 'Número do Pedido',
-    example: 1,
+    description: 'Número do Pedido.',
+    example: 25,
   })
   @IsNumber()
   orderNumber: number;
 
   @ApiProperty({
-    description: 'Descrição do Pedido',
-    example: 'Pedido de água',
+    description: 'Descrição do Pedido.',
+    example: 'Pedido de Arroz 5kg',
   })
   @IsString()
   orderDescription: string;
 
+  @ApiProperty({ type: [CreateOrderItemsDto] })
   @ValidateNested({ each: true })
   @Type(() => CreateOrderItemsDto)
   orderItems?: CreateOrderItemsDto[];

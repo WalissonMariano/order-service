@@ -72,4 +72,4 @@ export class TypeOfItemsService {
         return this.typeOfItemsRepository.delete({ id: typeOfItemsId });
     }
        
-}
+} 

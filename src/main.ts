@@ -9,8 +9,9 @@ async function bootstrap() {
     .setTitle('Documentação API Cadastro de Pedidos')
     .setDescription('API para registro de pedidos e calculo de impostos.')
     .setVersion('2.0')
-    .addTag('Orders')
-    .addTag('Items')
+    .addTag('Order')
+    .addTag('Item')
+    .addTag('Type-Of-Items')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

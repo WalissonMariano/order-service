@@ -6,7 +6,7 @@ import { Order } from "../entities/order.entity";
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from "@nestjs/typeorm";
 import { OrderItems } from "../../order-items/entities/order-items.entity";
-import { BadRequestException, NotFoundException } from "@nestjs/common";
+import { NotFoundException } from "@nestjs/common";
 import { CreateOrderDto } from "../dto/create-order.dto";
 import { CreateOrderItemsDto } from "src/order-items/dto/create-order-items.dto";
 import { itemMock } from "../../item/__mock__/item.mock";
@@ -122,15 +122,6 @@ describe('OrderService', () => {
   
         await expect(orderService.createOrder(createOrderDto)).rejects.toThrow(NotFoundException);
       });
-  /*
-      it('should throw BadRequestException if orderItems are missing', async () => {
-        const invalidDto = { ...createOrderDto, orderItems: [] };
-  
-        await expect(orderService.createOrder(invalidDto))
-          .rejects
-          .toThrow(BadRequestException);
-      });
-      */
       
     });  
 
@@ -142,17 +133,7 @@ describe('OrderService', () => {
       createdAt: new Date(), 
       updateAt: new Date()
     };
-/*
-    it('should create an order item for the given order', async () => {
-      jest.spyOn(orderService, 'getOrderById').mockResolvedValueOnce({ id: 1 } as Order);
-      jest.spyOn(itemService, 'getItemById').mockResolvedValueOnce({});
-      jest.spyOn(orderItemsService, 'calculateTaxValue').mockResolvedValueOnce(10);
-      jest.spyOn(orderItemsService, 'calculateTotalValue').mockResolvedValueOnce(100);
-      jest.spyOn(orderItemsRepository, 'save').mockResolvedValueOnce(createOrderItemsDto as OrderItems);
 
-      const result = await orderService.createOrderItemsByIdOrder(1, createOrderItemsDto);
-      expect(result).toEqual(createOrderItemsDto);
-    });*/
   });
 
 
