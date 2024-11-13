@@ -6,7 +6,8 @@ API para gerenciar pedidos, incluindo operações de criação, atualização, e
 ## Requisitos
 
 1 - Possuir um banco de dados PostgreSQL instalado.
-1 - Possuir NodeJs instalado.
+<br>
+2 - Possuir NodeJs instalado.
 
 ## Variáveis de ambiente
 
