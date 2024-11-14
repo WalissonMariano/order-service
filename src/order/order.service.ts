@@ -34,7 +34,7 @@ export class OrderService {
     return orders;
   }
 
-  async getOrderById(id: number) {
+  async getOrderById(id: number): Promise<Order> {
     const order = await this.orderRepository.findOne({
       where: { id },
     });
@@ -46,7 +46,7 @@ export class OrderService {
     return order;
   }
 
-  async getOrderByNumber(orderNumber: number) {
+  async getOrderByNumber(orderNumber: number): Promise<Order> {
     const order = await this.orderRepository.findOne({
       where: { orderNumber },
     });
@@ -112,7 +112,7 @@ export class OrderService {
     return this.orderRepository.delete({id: orderId});
   }
 
-  async updateOrder(orderId: number, updateOrderDto: UpdateOrderDto) {
+  async updateOrder(orderId: number, updateOrderDto: UpdateOrderDto): Promise<Order> {
     const order = await this.getOrderById(orderId);
     order.orderNumber = updateOrderDto.orderNumber;
     order.orderDescription = updateOrderDto.orderDescription;

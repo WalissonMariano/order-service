@@ -14,18 +14,13 @@ import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
 import { ReturnItemDto } from './dto/return-item.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Item } from './entities/item.entity';
+import { DeleteResult } from 'typeorm';
 
 @ApiTags('Item')
 @Controller('item')
 export class ItemController {
   constructor(private readonly itemService: ItemService) {}
-
-  @ApiOperation({ summary: 'Cria item' })
-  @UsePipes(ValidationPipe)
-  @Post()
-  async create(@Body() createItemDto: CreateItemDto) {
-    return await this.itemService.createItem(createItemDto);
-  }
 
   @ApiOperation({ summary: 'Busca todos os itens' })
   @Get()
@@ -37,15 +32,17 @@ export class ItemController {
 
   @ApiOperation({ summary: 'Busca item por id' })
   @Get(':id')
-  async getItemById(@Param('id') id: number) {
+  async getItemById(@Param('id') id: number): Promise<Item> {
     return await this.itemService.getItemById(id);
   }
 
-  @ApiOperation({ summary: 'Deleta item por id' })
-  @Delete(':id')
-  async deleteItem(@Param('id') id: number) {
-    return await this.itemService.deleteItem(id);
+  @ApiOperation({ summary: 'Cria item' })
+  @UsePipes(ValidationPipe)
+  @Post()
+  async create(@Body() createItemDto: CreateItemDto): Promise<CreateItemDto> {
+    return await this.itemService.createItem(createItemDto);
   }
+
 
   @ApiOperation({ summary: 'Altera item por id' })
   @UsePipes(ValidationPipe)
@@ -53,7 +50,14 @@ export class ItemController {
   async updateItem(
     @Param('id') id: number, 
     @Body() updateItemDto: UpdateItemDto
-  ) {
+  ): Promise<Item> {
     return await this.itemService.updateItem(id, updateItemDto);
   }
+
+  @ApiOperation({ summary: 'Deleta item por id' })
+  @Delete(':id')
+  async deleteItem(@Param('id') id: number): Promise<DeleteResult> {
+    return await this.itemService.deleteItem(id);
+  }
+
 }

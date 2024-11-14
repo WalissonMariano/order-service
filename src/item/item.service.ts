@@ -54,12 +54,6 @@ export class ItemService {
       ...createItemDto,
     });
   }
-
-  async deleteItem(itemId: number): Promise<DeleteResult> {
-    await this.getItemById(itemId);
-
-    return this.itemRepository.delete({ id: itemId });
-  }
  
   async updateItem(itemId: number, updateItemDto: UpdateItemDto): Promise<Item> {
     const item = await this.getItemById(itemId);
@@ -70,4 +64,11 @@ export class ItemService {
     return await this.itemRepository.save(item);
   }
 
+  async deleteItem(itemId: number): Promise<DeleteResult> {
+    await this.getItemById(itemId);
+
+    return this.itemRepository.delete({ id: itemId });
+  }
+
 }
+

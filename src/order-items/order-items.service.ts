@@ -12,7 +12,7 @@ export class OrderItemsService {
         private readonly orderItemsRepository: Repository<OrderItems>,
         private readonly itemService: ItemService,
     ){}
-
+ 
     async getAllTypesOfItems(): Promise<OrderItems[]> {
         const orderItems = this.orderItemsRepository.find()
 

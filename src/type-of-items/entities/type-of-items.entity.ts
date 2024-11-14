@@ -16,7 +16,7 @@ import {
     @Column({ name: 'type_items_description', nullable: false })
     typeItemsDescription: string;
   
-    @Column({ name: 'tax_percentage', nullable: false })
+    @Column({ name: 'tax_percentage',type: 'decimal', precision: 6, scale: 2, nullable: false })
     taxPercentagem: number;
   
     @CreateDateColumn({ name: 'created_at' })
